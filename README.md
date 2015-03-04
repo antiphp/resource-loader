@@ -73,7 +73,8 @@ echo $headScript->toString(8), PHP_EOL;
 
     </head>
     <!-- .. -->
-</html>```
+</html>
+```
 
 
 Or in your `layout/my_layout_2`:
@@ -92,7 +93,8 @@ echo $headScript->toString(8), PHP_EOL;
 
     </head>
     <!-- .. -->
-</html>```
+</html>
+```
 
 Or within a view script:
 ```php
@@ -100,7 +102,8 @@ $this->resource('data-tables');
 ?>
 <table class="data-table">
 <!-- .. -->
-</table>```
+</table>
+```
 
 
 The resource loader assures that only the required resources are loaded.
