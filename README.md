@@ -1,23 +1,40 @@
 Resource Loader
 ===============
 
-This one is a Zend Framework (2) View Helper to load UI resources and their dependencies.
-You need to define the dependencies yourself within the configuration.
+This one is a Zend Framework (2) View Helper to load CSS and JavaScript resources with a special focus on dependencies.
+
+What's done
+-----------
+ * The resource loader registers the requested CSS and JavaScript resources to your ZF head*() view helpers
+   and resolves the resource dependencies correctly
+   
+   F.e. if you're using Bootstrap, then jQuery is a required resource of Bootstrap. So you have to define two resources, but you only have to load - and think about - the Bootstrap resource, because you already configured the dependency (Bootstrap requires jQuery) in your configurastion.
+
+What's NOT done
+---------------
+ * The package does define any dependency, you need to define all the resource dependencies yourself.
+ * The package does not download (server-side) any of your defined or requested libraries
 
 
 Configuration
 -------------
 
+Here's a module configuration example. First of all we need to register the View Helper in the view helper service configuration.
+
 ```php
 return array(
     'view_helpers' => array(
         'factories' => array(
-            'resource_loader' => 'AntiPhp\ResourceLoader\View\Helper\ResourceLoaderServiceFactory'
+            'resource' => 'AntiPhp\ResourceLoader\View\Helper\ResourceLoaderServiceFactory'
         )
-    ),
-    // ..
+    )
+);
+```
+
+In the same configruation file we need to define our resource configuration like this:
+```php
+return aray(
     'resource_loader' => array(
-        'class' => 'AntiPhp\ResourceLoader\View\Helper\ResourceLoader',
         'resources' => array(
             'jquery' => array(
                 'js' => 'vendor/jquery/jquery.min.js'
@@ -57,9 +74,10 @@ return array(
 Usage
 -----
 
-Then use the resource loader like this, f.e. in your `layout/my_layout_1`:
+Now that the resource loader knows all UI resources, we can use them within our layout based on Bootstrap:
 ```php
 $this->resource('my_layout_1');
+// refers to configuration key resource_loader/resources/my_layout_1
 ?>
 <html>
     <head>
@@ -77,9 +95,10 @@ echo $headScript->toString(8), PHP_EOL;
 ```
 
 
-Or in your `layout/my_layout_2`:
+Or maybe we prefer YAML over Bootstrap:
 ```php
 $this->resource('my_layout_2');
+// refers to configuration key resource_loader/resources/my_layout_2
 ?>
 <html>
     <head>
@@ -96,14 +115,14 @@ echo $headScript->toString(8), PHP_EOL;
 </html>
 ```
 
-Or within a view script:
+
+Or within a view script we'd like to use jQuery DataTables:
 ```php
-$this->resource('data-tables');
+$this->resource('data-table');
 ?>
 <table class="data-table">
 <!-- .. -->
 </table>
 ```
 
-
-The resource loader assures that only the required resources are loaded.
+The resource loader assures that only the required resources are loaded and that you only have to think once about dependencies.
