@@ -1,0 +1,19 @@
+{
+    "name": "antiphp/resource-loader",
+    "description": "Zend Framework (2) View Helper to load UI resources",
+    "authors": [
+        {
+            "name": "Christian Reinecke",
+            "email": "christian.reinecke@web.de"
+        }
+    ],
+    "require-dev": {
+        "zendframework/zend-view": "2.*",
+        "zendframework/zend-servicemanager": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "AntiPhp\\ResourceLoader\\": "src/AntiPhp/ResourceLoader"
+        }
+    }
+}
