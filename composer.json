@@ -1,6 +1,9 @@
 {
     "name": "antiphp/resource-loader",
+    "type": "library",
     "description": "Zend Framework (2) View Helper to load UI resources",
+    "homepage": "http://www.antiphp.net",
+    "licence": "MIT",
     "authors": [
         {
             "name": "Christian Reinecke",
