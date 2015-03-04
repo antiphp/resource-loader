@@ -6,7 +6,7 @@ You need to define the dependencies yourself within the configuration.
 
 
 Configuration
-=============
+-------------
 
 ```php
 return array(
@@ -55,7 +55,7 @@ return array(
 
 
 Usage
-=====
+-----
 
 Then use the resource loader like this, f.e. in your `layout/my_layout_1`:
 ```php
