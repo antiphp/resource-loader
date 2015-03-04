@@ -2,9 +2,12 @@ Resource Loader
 ===============
 
 This one is a Zend Framework (2) View Helper to load UI resources and their dependencies.
-You need to define the dependencies yourself within the configuration. 
+You need to define the dependencies yourself within the configuration.
 
-Add the resources and their dependencies to your module configuration:
+
+Configuration
+=============
+
 ```php
 return array(
     'view_helpers' => array(
@@ -24,7 +27,7 @@ return array(
                 'css' => 'vendor/bootstrap/css/bootstrap.min.css',
                 'requires' => 'jquery'
             ),
-            'bootstrap-themed' => array(
+            'bootstrap.themed' => array(
                 'css' => 'vendor/bootstrap/css/bootstrap-theme.min.css',
                 'requires' => 'boostrap'
             ),
@@ -35,24 +38,24 @@ return array(
                 ),
                 'requires' => 'html5shiv'
             ),
-            'html5shiv' => array(
-                'js' => array(
-                    array('vendor/html5shiv/html5shiv.js', 'lte IE 9')
-                )
-            ),
             'my_layout_1' => array(
                 'requires' => array(
-                    'bootstrap-themed',
-                    'jquery'
+                    'bootstrap.themed',
+                    'font-awesome'
                 )
             ),
             'my_layout_2' => array(
                 'requires' => 'yaml'
-            )
+            ),
+            // html5shiv, font-awesome, data-tables, ...
         )
     )
 );
 ```
+
+
+Usage
+=====
 
 Then use the resource loader like this, f.e. in your `layout/my_layout_1`:
 ```php
@@ -71,6 +74,7 @@ echo $headScript->toString(8), PHP_EOL;
     </head>
     <!-- .. -->
 </html>```
+
 
 Or in your `layout/my_layout_2`:
 ```php
@@ -92,10 +96,11 @@ echo $headScript->toString(8), PHP_EOL;
 
 Or within a view script:
 ```php
-$this->resource('data-tables', array('selector' => 'table.data-table'));
+$this->resource('data-tables');
 ?>
 <table class="data-table">
 <!-- .. -->
 </table>```
+
 
 The resource loader assures that only the required resources are loaded.
